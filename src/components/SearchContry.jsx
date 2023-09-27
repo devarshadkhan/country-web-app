@@ -1,12 +1,12 @@
-import React from 'react'
-import { AiOutlineSearch } from 'react-icons/Ai';
+import React from 'react';
+import { AiOutlineSearch } from 'react-icons/ai'; // Notice the correct import statement
 
-const SearchContry = () => {
+const SearchCountry = () => {
   return (
     <div>
-      <div className='srchContry'><AiOutlineSearch /> <input type='text' placeholder='search contry' /></div>
+      <div className='srchCountry'><AiOutlineSearch /> <input type='text' placeholder='search country' /></div>
     </div>
-  )
-}
+  );
+};
 
-export default SearchContry
+export default SearchCountry;
