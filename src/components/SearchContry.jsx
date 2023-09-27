@@ -1,6 +1,5 @@
 import React from 'react'
 import { AiOutlineSearch } from 'react-icons/Ai';
-// import * as AiIcons from 'react-icons/Ai';
 
 const SearchContry = () => {
   return (

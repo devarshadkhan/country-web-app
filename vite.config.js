@@ -14,11 +14,11 @@ import { defineConfig } from 'vite';
     build: {     
 rollupOptions: {   
     external: [  
-       'react-icons/Bs',     
+    'react-icons/Bs',     
     'react-icons/cg',     
     'react-icons/Fa',     
     'react-icons/si',     
-    'react-icons/ai',     
+    'react-icons/Ai',     
   ], // Add this line    
  }, 
   }, 
