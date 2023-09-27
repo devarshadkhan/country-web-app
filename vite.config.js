@@ -1,7 +1,21 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import { resolve } from "path";
+import { defineConfig } from "vite";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  alias: {
+    "@": resolve(__dirname, "src"),
+  },
+  plugins: [vueJsx()],
+  build: {
+    rollupOptions: {
+      external: [
+        "react", // ignore react stuff
+        "react-dom",
+      ],
+    },
+  },
+  optimizeDeps: {
+    include: ["@apollo/client/core", "@apollo/client/link/error"],
+  },
+});
