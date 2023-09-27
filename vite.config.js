@@ -18,6 +18,7 @@ rollupOptions: {
     'react-icons/cg',     
     'react-icons/Fa',     
     'react-icons/si',     
+    'react-icons/Ai',     
   ], // Add this line    
  }, 
   }, 
