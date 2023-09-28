@@ -236,3 +236,9 @@ body {
 .bodysketlon{margin: 20px 0;}
 
 
+.borderBtn{
+  text-decoration: none;
+  color: #000;
+  padding: 6px;
+  margin: 6px;
+}

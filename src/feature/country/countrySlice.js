@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-// import { fetchCountryAll } from './countryapimiddleware'
 import axiosInstance from '../../Axios/axios'
 import { API } from '../../Axios/endpoint'
 const initialState = {
     loading:false,
     countryData :[],
     countrySearch :[],
+    region:"",
     error:false,
     success:false,
-    message:""
+    message:"",
+    
 }
 export const fetchCountryAll = createAsyncThunk(
     'country/fetchCountry',
@@ -17,7 +18,7 @@ export const fetchCountryAll = createAsyncThunk(
         const response = await axiosInstance.get(API.getAllCountry)
         return response.data
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         return thunkAPI.rejectWithValue(error)
       }
     }
@@ -28,6 +29,19 @@ export const searchByCode = createAsyncThunk(
       try {
         const response = await axiosInstance.get(`${API.searchByCode}/${code}`)
         // console.log(response);
+        return response.data
+      } catch (error) {
+        // console.log(error);
+        return thunkAPI.rejectWithValue(error)
+      }
+    }
+  )
+export const searchByRegion = createAsyncThunk(
+    'country/searchByRegion',
+    async (region,thunkAPI) => {
+      try {
+        const response = await axiosInstance.get(`${API.searchByRegion}/${region}`)
+        console.log(response);
         return response.data
       } catch (error) {
         console.log(error);
@@ -45,26 +59,18 @@ export const countrySlice = createSlice({
     name:"country",
     initialState:initialState,
     reducers:{
-        reset: (state)=>{
+        reset: (state) => {
             state.loading = false,
             state.error = false,
             state.success = false,
-            state.message = ""
+            state.message = "",
+            state.countrySearch = []
+        },
+        setRegion : (state, action) => {
+          state.region = action.payload
         }
     },
-    // extraReducers:{
-    //     [fetchCountryAll.pending]:(state)=>{
-    //         state.loading = true
-    //     },
-    //     [fetchCountryAll.pending]:(state,{payload})=>{
-    //         state.loading = false,
-    //                 state.countryData = payload,
-    //                 state.success = true 
-    //     },
-    //     [fetchCountryAll.pending]:(state)=>{
-    //         state.loading = true
-    //     }
-    // }
+   
     extraReducers: (builder)=>{
         builder
         .addCase(fetchCountryAll.pending,(state)=>{
@@ -83,7 +89,30 @@ export const countrySlice = createSlice({
             state.countrySearch = action.payload,
             state.success = true 
         })
+        .addCase(searchByRegion.pending,(state)=>{
+            state.loading = true
+        })
+        .addCase(searchByRegion.fulfilled, (state,action)=>{
+            state.loading = false,
+            state.countryData = action.payload,
+            state.success = true 
+        })
     }
 })
 
-export default countrySlice.reducer
+export const {reset,setRegion} = countrySlice.actions;
+export default countrySlice.reducer;
+
+ // extraReducers:{
+    //     [fetchCountryAll.pending]:(state)=>{
+    //         state.loading = true
+    //     },
+    //     [fetchCountryAll.pending]:(state,{payload})=>{
+    //         state.loading = false,
+    //                 state.countryData = payload,
+    //                 state.success = true 
+    //     },
+    //     [fetchCountryAll.pending]:(state)=>{
+    //         state.loading = true
+    //     }
+    // }

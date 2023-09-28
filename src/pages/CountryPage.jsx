@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { fetchCountryAll, searchByCode } from "../feature/country/countrySlice";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { fetchCountryAll, reset, searchByCode } from "../feature/country/countrySlice";
 // import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import ContentLoader from "react-content-loader";
@@ -43,15 +43,22 @@ const CountryPage = () => {
   //   }, []);
 
   const { countrySearch, loading } = useSelector((state) => state.country);
-  console.log("fjhfurwhfuwhefbw", countrySearch[0]?.nativeName?.fra?.official);
+  // console.log("fjhfurwhfuwhefbw", countrySearch[0]?.nativeName?.fra?.official);
   const dispatch = useDispatch();
   // Use useMemo to memoize the data and prevent unnecessary re-renders
   const memoizedCountryData = useMemo(() => countrySearch, [countrySearch]);
 
+  // console.log(
+  //   "+++++++++++++++++++++++++++====",
+  //   memoizedCountryData[0]?.maps?.googleMaps
+  // );
   useEffect(() => {
     if (id) {
       dispatch(searchByCode(id.toLowerCase()));
     }
+    return () => {
+      dispatch(reset());
+    };
   }, [dispatch, id]);
 
   return (
@@ -61,13 +68,12 @@ const CountryPage = () => {
           <div className="country_page_btn">
             <button onClick={() => navigate(-1)}>
               {" "}
-           {/* <BsArrowLeft /> */}
- Go Back
+              {/* <BsArrowLeft /> */}
+              Go Back
             </button>
           </div>
           {loading ? (
             <>
-            
               {/* {[1, 2, 3, 4, 5].map((id) => (
                 <div key={id}>
                   <h4>
@@ -188,10 +194,29 @@ const CountryPage = () => {
                           .join(", ")
                       : "N/A"}
                   </p>
+
+                  <p>
+                    <span>Border Countries</span>:{" "}
+                    {memoizedCountryData[0]?.borders
+                      ? memoizedCountryData[0]?.borders?.map((e) => {
+                          return (
+                            <>
+                              <Link to={`/country/${e}`} className="borderBtn">
+                                {e}
+                                {memoizedCountryData !==
+                                  memoizedCountryData[0]?.borders.length - 1 &&
+                                  ",    "}
+                              </Link>
+                            </>
+                          );
+                        })
+                      : "No Border in this Country Area"}
+                  </p>
                 </div>
               </div>
             </>
           )}
+          {/* <iframe src={`${memoizedCountryData[0]?.maps?.googleMaps}`}  title={`Map of ${memoizedCountryData[0]?.name?.common}`} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style={{width:"100%", height:"450px", border:"none", margin:"3rem 0"}}></iframe> */}
         </div>
       </div>
     </>

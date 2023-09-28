@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCountryAll } from "../feature/country/countryapimiddleware";
+import { fetchCountryAll } from "../feature/country/countrySlice";
 import { Link } from "react-router-dom";
 // import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -10,7 +10,7 @@ import Skeleton from "@mui/material/Skeleton";
 const ContryCard = () => {
   const { countryData, loading } = useSelector((state) => state.country);
   const dispatch = useDispatch();
-  console.log(countryData);
+  // console.log(countryData);
 
   useEffect(() => {
     dispatch(fetchCountryAll());

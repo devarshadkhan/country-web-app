@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import countryReducer from './country/countrySlice'
+import countrySlice from './country/countrySlice'
 import LoaderReducer from "./loaderSlice"
 export const store = configureStore({
   reducer: {
-    country:countryReducer,
+    country:countrySlice,
     loader:LoaderReducer,
   },
 })

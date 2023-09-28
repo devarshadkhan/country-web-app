@@ -1,16 +1,31 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { reset , setRegion  } from "../feature/country/countrySlice.js";
 const ContrybyRegion = () => {
+  const dispatch = useDispatch()
+  const region = ["Africa","Americas","Asia","Europe","Oceania"]
+  const[filter,setFilter]= useState()
+
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(reset());
+  //   };
+  // }, []);
   return (
     <div>
       <div className="ctry">
-        <select name="cars" id="cars">
-          <option value="volvo" defaultValue>
+        <select >
+          <option value="" defaultValue>
             Filter by Region
           </option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
+          {region.map((e)=>{
+            return(
+              <>
+              <option value={e} onClick={()=>setFilter(e)}>{e}</option>
+              </>
+            )
+          })}
+          
         </select>
       </div>
     </div>
