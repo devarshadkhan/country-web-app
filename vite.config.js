@@ -29,7 +29,6 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: "/country-web-app/",
   build: {
     rollupOptions: {
       external: ['react-icons/Bs']
