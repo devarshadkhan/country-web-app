@@ -6,7 +6,7 @@ import { fetchCountryAll, searchByCode } from "../feature/country/countrySlice";
 import "react-loading-skeleton/dist/skeleton.css";
 import ContentLoader from "react-content-loader";
 import Skeleton from "@mui/material/Skeleton";
-import { BsArrowLeft } from "react-icons/bs";
+import { BsArrowLeft } from "react-icons/Bs";
 
 const CountryPage = () => {
   const { id } = useParams();
