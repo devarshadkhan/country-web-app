@@ -1,5 +1,4 @@
 import React from 'react'
-import { BsMoon } from 'react-icons/Bs';
 
 const Header = () => {
   return (
@@ -7,7 +6,7 @@ const Header = () => {
             <div className='header'>
                 <div className='sub_hdr'>
                     <h1>Where in the world</h1>
-                    <p><BsMoon /> Dark Mode</p>
+                    {/* <p><BsMoon /> Dark Mode</p> */}
                 </div>
             </div>
     </React.Fragment>

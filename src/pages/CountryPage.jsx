@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { AiOutlineArrowLeft } from "react-icons/Ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchCountryAll, searchByCode } from "../feature/country/countrySlice";
@@ -60,7 +59,7 @@ const CountryPage = () => {
           <div className="country_page_btn">
             <button onClick={() => navigate(-1)}>
               {" "}
-              <AiOutlineArrowLeft /> Back
+              Go Back
             </button>
           </div>
           {loading ? (
