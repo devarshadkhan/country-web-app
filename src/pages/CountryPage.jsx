@@ -6,6 +6,8 @@ import { fetchCountryAll, searchByCode } from "../feature/country/countrySlice";
 import "react-loading-skeleton/dist/skeleton.css";
 import ContentLoader from "react-content-loader";
 import Skeleton from "@mui/material/Skeleton";
+import { BsArrowLeft } from "react-icons/bs";
+
 const CountryPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -59,7 +61,8 @@ const CountryPage = () => {
           <div className="country_page_btn">
             <button onClick={() => navigate(-1)}>
               {" "}
-              Go Back
+           <BsArrowLeft />
+ Go Back
             </button>
           </div>
           {loading ? (
