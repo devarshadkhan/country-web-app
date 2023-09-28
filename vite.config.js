@@ -32,7 +32,7 @@ export default defineConfig({
   base: "/country-web-app/",
   build: {
     rollupOptions: {
-      external: ['react-icons']
+      external: ['react-icons/Bs']
     }
   }
 })
