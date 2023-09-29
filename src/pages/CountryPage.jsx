@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { fetchCountryAll, reset, searchByCode } from "../feature/country/countrySlice";
+import { fetchCountryAll,  searchByCode, searchByRegion } from "../feature/country/countrySlice";
 // import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import ContentLoader from "react-content-loader";
@@ -42,7 +42,7 @@ const CountryPage = () => {
   //       });
   //   }, []);
 
-  const { countrySearch, loading } = useSelector((state) => state.country);
+  const { countrySearch, loading, region } = useSelector((state) => state.country);
   // console.log("fjhfurwhfuwhefbw", countrySearch[0]?.nativeName?.fra?.official);
   const dispatch = useDispatch();
   // Use useMemo to memoize the data and prevent unnecessary re-renders
@@ -56,9 +56,9 @@ const CountryPage = () => {
     if (id) {
       dispatch(searchByCode(id.toLowerCase()));
     }
-    return () => {
-      dispatch(reset());
-    };
+  //  if(region){
+  //   dispatch(searchByRegion(region))
+  //  }
   }, [dispatch, id]);
 
   return (

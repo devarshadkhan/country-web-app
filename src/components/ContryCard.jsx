@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCountryAll } from "../feature/country/countrySlice";
+import { fetchCountryAll, searchByRegion } from "../feature/country/countrySlice";
 import { Link } from "react-router-dom";
 // import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -8,13 +8,17 @@ import ContentLoader from "react-content-loader";
 import Skeleton from "@mui/material/Skeleton";
 
 const ContryCard = () => {
-  const { countryData, loading } = useSelector((state) => state.country);
+  const { countryData, loading , region, searchCountry } = useSelector((state) => state.country);
   const dispatch = useDispatch();
   // console.log(countryData);
-
+ const filterData = countryData.filter((item)=> item.name.common.toLowerCase().includes(searchCountry))
   useEffect(() => {
     dispatch(fetchCountryAll());
-  }, []);
+    if(region){
+      dispatch(searchByRegion(region))
+     }
+    
+  }, [region, dispatch, searchCountry]);
 
   return (
     <div>
@@ -52,7 +56,7 @@ const ContryCard = () => {
           </>
         ) : (
           <>
-            {countryData.map((item) => {
+            {filterData?.map((item) => {
               return (
                 <>
                   <Link

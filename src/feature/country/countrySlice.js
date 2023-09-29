@@ -6,6 +6,7 @@ const initialState = {
     countryData :[],
     countrySearch :[],
     region:"",
+    searchCountry:"",
     error:false,
     success:false,
     message:"",
@@ -64,10 +65,15 @@ export const countrySlice = createSlice({
             state.error = false,
             state.success = false,
             state.message = "",
-            state.countrySearch = []
+            state.countrySearch = [],
+            state.region = ""
         },
         setRegion : (state, action) => {
           state.region = action.payload
+        },
+
+        setSearchCountry : (state, action) =>{
+          state.searchCountry = action.payload
         }
     },
    
@@ -100,7 +106,7 @@ export const countrySlice = createSlice({
     }
 })
 
-export const {reset,setRegion} = countrySlice.actions;
+export const {reset,setRegion, setSearchCountry} = countrySlice.actions;
 export default countrySlice.reducer;
 
  // extraReducers:{
